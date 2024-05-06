@@ -1,1 +1,3 @@
-site_name: My Docs
+site_name: Soil OI 资料库
+theme:
+  name: material
