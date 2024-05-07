@@ -2,4 +2,4 @@ site_name: Soil OI 资料库
 theme:
   name: material
   palette:
-    primary: gray
+    primary: grey
