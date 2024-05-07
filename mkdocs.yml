@@ -3,3 +3,9 @@ theme:
   name: material
   palette:
     primary: grey
+  language: zh
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - toc.integrate
+    
