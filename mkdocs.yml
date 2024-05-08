@@ -8,7 +8,6 @@ theme:
   features:
     - navigation.tabs
     - navigation.tabs.sticky
-    - toc.integrate
 extra:
   consent:
     title: Cookie 请求
