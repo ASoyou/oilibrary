@@ -1,0 +1,724 @@
+2022.7.20 动工。
+
+2022.7.22 基本完工。
+
+2022.7.22 修缮了部分不规范 $\LaTeX$ 以及 $\KaTeX$。
+
+2022.7.22 修复了一些 typo。
+
+2022.9.23 修复了一些 typo。
+
+# 基础知识
+
+## 取模
+
+$a\bmod b$ 表示 $a$ 除以 $b$ 的余数。
+
+### 取模的性质
+
+$$a\bmod b=a-b\times\left\lfloor\dfrac ab\right\rfloor$$
+
+$$\left(a\bmod c+b\bmod c\right) \bmod c=\left(a+b\right)\bmod c$$
+
+$$\left(a\bmod c\right)\left(b\bmod c\right) \bmod c=ab\bmod c$$
+
+
+
+## 整除：
+
+通常用 $a|b$ 表示，表示 $a$ 是 $b$ 的因数，也可以转换成 $b\equiv 0\pmod a$。同余方程在第二章会讲。
+
+## 判断
+
+这个东西我忘了其真名是什么了，就暂且叫它判断吧。
+
+是一个用中括号括起来的东西，里面是一个等式，不等式或者等等。
+
+如果里面的东西成立，其值为 $1$，否则为 $0$，就类似于一个 $\tt bool$ 值。
+
+类似于 $\left[n\ne1\right]$，$\left[i^j\equiv 1\pmod p\right]$ 等等。
+
+这个东西常和求和符号配合使用。
+
+## 求和符号：
+
+### 定义
+
+$$\sum_{\tt beginning}^{\tt ending}\tt expressions$$
+
+其中，$\tt beginning$ 要声明一个变量，类似于：$\sum\limits_{i=1}$ 或者 $\sum\limits_{d|n}$。前者表示 $i$ 初值为 $1$，每次求和后 $+1$；后者表示枚举 $n$ 的全部因数 $d$。
+
+$\tt ending$ 表示循环求和的结束条件，注意这里在求和的时候还是包含 $\tt ending$ 对应的值的。在某些情况下也可以不写（例如上面提到的 $\sum\limits_{d|n}$，这里就可以不用写 $\tt ending$，因为枚举的个数是有限的）。
+
+$\tt expressions$ 表示你要求和什么。一般是一个带有 $\tt beginning$ 中声明变量的表达式，当然没有也没关系，可以化简，下文会提到。这个 $\tt expressions$ 有时候不算好理解。我举个栗子：
+
+$$\sum_{i=1}^n ia_i$$
+
+上面这个式子表示什么呢？我把它展开一下就是：
+
+$$1a_1+2a_2+3a_3+4a_4+\dots +na_n$$
+
+抑或是：
+
+$$\sum_{d|12}da_d$$
+
+相当于枚举 $12$ 的所有因数，也就是
+
+$$1a_1+2a_2+3a_3+4a_4+6a_6+12a_{12}$$
+
+这下你大概率是听懂了吧。
+
+### 性质
+
+当有常数项的时候，可以提出来：（分配律）
+
+$$\sum_{i=1}^n ai=a\sum_{i=1}^n i$$
+
+如果没有变量的时候，整个化成非求和式：（乘法）
+
+$$\sum_{i=1}^nm=nm$$
+
+还有各种性质，到后文再给大家讲吧。
+
+### 常用求和式转非求和式
+
+$$\sum_{i=1}^ni=\dfrac12n\left(n+1\right)$$
+
+$$\sum_{i=1}^ni^2=\dfrac16n\left(n+1\right)\left(2n+1\right)$$
+
+$$\sum_{i=1}^ni^3=\dfrac14n^2\left(n+1\right)^2$$
+
+上面三个要背下来。除非你会拉格朗日插值考场上算，不然必须得背下来。这三个式子在学整除分块的时候很好用。
+
+## 求积符号
+
+这个符号：
+
+$$\prod_{\tt beginning}^{\tt ending}\tt expressions$$
+
+跟求和符号差不多，只是把加法换成了乘法。用的不多，先不讲，咕着吧。
+
+## 唯一分解
+
+对于任意一个正整数 $n$，都可以被唯一地分解为几个质数的积的形式。一般一个正整数的唯一分解式是这个样子的：
+
+$$n=\prod p_i^{k_i}$$
+
+其中 $p_i$ 表示质数，$k_i$ 表示相应的次数。
+
+在 OI 中，对于单次分解，使用最最朴素的算法，可以做到 $O\left(\sqrt n\right)$；对于多次分解，可以在 $O\left(n+q\log n\right)$ 的时间复杂度内完成分解，$q$ 代表询问次数。
+
+## 最大公约数和最小公倍数
+
+$\gcd\left(a, b\right)$ 表示 $a$ 和 $b$ 的最大公约数。
+
+$\operatorname{lcm}\left(a,b\right)$ 表示 $a$ 和 $b$ 的最小公倍数。
+
+### $\gcd$ 和 $\operatorname{lcm}$ 的性质：
+
+$$\gcd\left(a,b\right)=\prod p_i^{\min\left(k_{i_a},k_{i_b}\right)}$$
+
+$$\operatorname{lcm}\left(a,b\right)=\prod p_i^{\max\left(k_{i_a},k_{i_b}\right)}$$
+
+$$\gcd\left(a,b\right)\operatorname{lcm}\left(a,b\right)=ab$$
+
+## 函数
+
+函数大家肯定都会。这里讲函数从几方面来讲：完全积性函数和积性函数，以及常用的函数。
+
+### 完全积性函数
+
+**对于一个完全积性函数，目前我们只要考虑整数就好了。其他小数分数虚数复数一律不管。**
+
+对于一个完全积性函数 $f\left(x\right)$，必有 $f\left(ab\right)=f\left(a\right)f\left(b\right)$。
+
+### 积性函数
+
+这个比较重要。
+
+积性函数和完全积性函数有什么区别呢，在于定义。
+
+积性函数的定义是：
+
+对于一个积性函数 $f\left(x\right)$，若有 $\gcd\left(a,b\right)=1$（即 $a,b$ 互质），那么 $f\left(ab\right)=f\left(a\right)f\left(b\right)$。
+
+### ~~没什么用的~~常用函数
+
+- $I\left(n\right)$：
+
+  这是一个~~老顽固菜逼~~完全积性函数。无论什么情况下，$I\left(n\right)$ 的值都为 $1$。你可能会问这个玩意有什么用，在讲后面狄利克雷卷积的时候你就知道了。
+
+- $e\left(n\right)$：
+
+  ~~其实他函数名并不是这么打的，而是我不会打这玩意的 $\LaTeX$。真正的函数名应该是类似于一个 $\in$ 的东西，但是不大一样。当然这样叫也可以，挺多人也是这样打的~~
+  
+  2022.7.22 upd: 知道了。是 $\epsilon$ `\epsilon`，但是懒得改了。
+
+  是完全积性函数。$e\left(n\right)=[n=1]$。也就是说，当 $n$ 为 $1$ 的时候 $e\left(n\right)$ 值为 $1$，其他情况都为 $0$。
+
+- $id\left(n\right)$
+
+  完全积性函数。有 $id\left(n\right)=n$，也就是自己。
+
+上面三个函数你现在看确实啥用没有，但是到后面可就用处大了。
+
+### 确实好用的常用函数
+
+- $\varphi\left(n\right)$：
+
+  欧拉函数。是积性函数。有以下定义：
+  
+  $$\varphi\left(n\right)=\sum_{i=1}^{n}\left[\gcd\left(i,n\right)=1\right]$$
+  
+  也就是 $[1,n]$ 之内与 $n$ 互质的整数的个数。
+  
+  $$\varphi\left(n\right)=n\prod\left(1-\dfrac{1}{p_i}\right)$$
+  
+  其中 $p_i$ 为互不相同的 $n$ 的唯一分解中的质数。
+  
+  单次求 $\varphi$ 可以做到 $O\left(\sqrt n\right)$ 的复杂度，当然使用线性筛法可以做到多次询问总时间复杂度 $O\left(n+q\right)$。
+  
+  #### 例题：[Longge 的问题](https://www.luogu.com.cn/problem/P2303)
+  
+  题意：求 $\sum\limits_{i=1}^n\gcd\left(i,n\right)$。$n\lt 2^{32}$。
+  
+  一个比较基础的题目。推一下式子就搞定了，这里单点求 $\varphi$ 就可以。
+  
+  $$\begin{aligned}
+  &amp;\sum_{i=1}^n\gcd\left(i,n\right)\\
+  =&amp;\sum_{i=1}^n\sum_{d|n,d|i}d[\gcd\left(i,n\right)=d] \\
+  =&amp;\sum_{d|n}d\sum_{i=1}^{\frac nd}\left[\gcd\left(id,n\right)=d\right] \\
+  =&amp;\sum_{d|n}d\sum_{i=1}^{\frac nd}\left[\gcd\left(i,\dfrac nd\right)=1\right] \\
+  =&amp;\sum_{d|n}d\times \varphi\left(\dfrac nd\right) \\
+  \end{aligned}$$
+  
+  因为 $\dfrac nd$ 比较大，超出了线性筛的范围，所以使用单点求 $\varphi$。
+  
+- $\mu\left(n\right)$：
+
+  莫比乌斯函数。是积性函数。有以下定义：
+  
+  - 当 $n=1$ 时，$\mu\left(n\right)=1$。
+  
+  - 当 $n$ 的唯一分解式中的所有质数的次数都为 $1$ 时，$\mu\left(n\right)$ 为 $-1$ 的其质数种类次方。
+  
+  - 否则 $\mu\left(n\right)= 0$。
+  
+  同样使用线性筛法可以达到 $O\left(n+q\right)$ 的时间复杂度。
+  
+  莫比乌斯函数在正常情况下没有单独的特别用法，一般是在莫比乌斯反演中使用，后文中会提到。
+
+# 线性筛
+
+最普通的筛法，也称欧拉筛，常用。时间复杂度 $O\left(n\right)$。一般用于筛出质数和单点 $\varphi$，$\mu$ 等等。
+
+- 筛 $\varphi$：
+
+质数 $p$ 与小于自己的任何正整数互质，所以 $\varphi\left(p\right)=p-1$；
+ 
+当一个数 $x$ 可以被分解为一个质数 $a$ 和一个与这个质数互质的数 $b$ 时，满足积性函数的性质，有 $\varphi\left(x\right)=\varphi\left(a\right)\varphi\left(b\right)=\left(a-1\right)\varphi\left(b\right)$；
+
+否则，易得 $a\ |\ b$，故 $\varphi\left(x\right)=a\varphi\left(b\right)$。此为线性筛基本原理。
+
+```cpp
+void sieve() {
+    phi[1] = 1;
+    for (int i = 2; i &lt;= maxn; i++) {
+        if (!book[i]) {
+            prime[++cnt] = i;
+            phi[i] = i - 1;
+        }
+        for (int j = 1; j &lt;= cnt &amp;&amp;prime[j] * i &lt;= maxn; j++) {
+            book[prime[j] * i] = true;
+            if (i % prime[j] == 0) {
+                phi[prime[j] * i] = phi[i] * prime[j];
+                break;
+            } else {
+                phi[prime[j] * i] = phi[i] * (prime[j] - 1);
+            }
+        }
+    } 
+}
+```
+
+- 筛 $\mu$：
+
+根据其定义很容易想到怎么筛。
+
+```cpp
+void sieve() {
+	mu[1] = 1;
+	for (int i = 2; i &lt;= maxn; i++) {
+		if (!vis[i]) {
+			prime[++cnt] = i;
+			mu[i] = -1;
+		}
+		for (int j = 1; j &lt;= cnt &amp;&amp;i * prime[j] &lt;= maxn; j++) {
+			vis[i * prime[j]] = 1;
+			if (i % prime[j]) {
+				mu[i * prime[j]] = -mu[i];
+				continue;
+			}
+			break;
+		}
+	}
+}
+```
+
+
+# 埃氏筛
+
+把线性筛里的那一行 `if (i % prime[j] == 0) break;` 去掉，就变成了埃氏筛。时间复杂度 $O\left(n\log\log n\right)$。在数论题中不算常用，不过 NOIP2021 考了。
+
+# 狄利克雷卷积
+
+定义两个函数 $f,g$ 的狄利克雷卷积为 $f*g$，其自成一个函数。
+
+有：
+
+$$\left(f*g\right)\left(n\right)=\sum_{d|n}f\left(d\right)g\left(\dfrac nd\right)$$
+
+记住这个式子。很常用。
+
+## 常用的狄利克雷卷积
+
+$$\mu*I=e$$
+
+$$\varphi*I=id$$
+
+$$\mu * id=\varphi$$
+
+$$f*e=f$$
+
+等等。
+
+# 整除分块
+
+整除分块是一个小技巧，常用于以变量为分母的整除式的求和。
+
+## 一维整除分块
+
+最基础的整除分块是这样的：
+
+$$\sum_{i=1}^n\left\lfloor \dfrac ni\right\rfloor$$
+
+暴力算的话时间复杂度是 $O\left(n\right)$ 的。有没有更好的解决方式呢？
+
+当 $n=10$ 的时候，我们根据 $i$ 的变化列一个表：
+
+| $i$ | $\left\lfloor \dfrac ni\right\rfloor$ |
+| :----------: | :----------: |
+| $1$ | $10$ |
+| $2$ | $5$ |
+| $3$ | $3$ |
+| $4$ | $2$ |
+| $5$ | $2$ |
+| $6$ | $1$ |
+| $7$ | $1$ |
+| $8$ | $1$ |
+| $9$ | $1$ |
+| $10$ | $1$ |
+
+
+可以看出来，$1$，$2$，$3$，$4\sim 5$，$6\sim 10$ 的值是一样的。对于这些每一块，我们之间使用乘法乘起来就好了。
+
+不难看出，对于左端点为 $l$ 的一块，其右端点为 $\left\lfloor\dfrac{n}{\left\lfloor\dfrac nl\right\rfloor}\right\rfloor$。使用一个循环统计其值即可。
+
+通过某种玄学方式可以证明，一共有大概 $\sqrt n$ 块，也就是时间复杂度是 $O\left(\sqrt n\right)$ 级别的。
+
+附：伪代码
+
+```
+l = 1, r = 0, ans = 0
+while l &lt;= n
+	r = n / (n / l)
+	ans += ...
+	l = r + 1
+```
+
+### 例题：[P2261 余数求和](https://www.luogu.com.cn/problem/P2261)
+
+题意：求 $\sum\limits_{i=1}^{n}k\bmod i$。$n,k\le 10^9$。
+
+根据取余的性质，可以得到原式等于
+
+$$\sum_{i=1}^nk-i\times \left\lfloor \dfrac ki\right\rfloor$$
+
+也就是
+
+$$nk-\sum_{i=1}^ni\times \left\lfloor \dfrac ki\right\rfloor$$
+
+右边整除分块即可。
+
+## 多维整除分块
+
+如果式子变成这样：
+
+$$\sum_{i=1}^k i\left\lfloor\dfrac ni \right\rfloor\left\lfloor\dfrac mi \right\rfloor$$
+
+出现了两个整除，普通的整除分块解决不了，怎么办呢？
+
+打个表，可以发现仍然出现了块状。
+
+所以实际上把代码中的 `r = n / (n / l)` 改成 `r = min(n / (n / l), m / (m / l))` 就完事了，然后 `ans` 在加的时候改一下就好了。
+
+### 例题：[P2260 模积和](https://www.luogu.com.cn/problem/P2260)
+
+题意：求 $\sum\limits_{i=1}^n\sum\limits_{j=1}^m\left(n\bmod i\right)\left(m\bmod j\right)[i\ne j]$。
+
+直接展开，然后就是二维整除分块板子。
+
+# 莫比乌斯反演
+
+对于一类求 $\gcd$ 和或者相似问题的时候，可以使用莫比乌斯反演。
+
+看一道基本例题：[仪仗队](https://www.luogu.com.cn/problem/P2158)
+
+这道题引出来一个最基本的莫比乌斯反演式子：
+
+$$\sum_{i=1}^n\sum_{j=1}^m[\gcd\left(i,j\right)=1]$$
+
+看起来很像欧拉函数一类的东西，其实是莫比乌斯反演。
+
+我们由常用狄利克雷卷积的式子可以得到，
+
+$$\mu*I=e$$
+
+然后我们取其定义，可以得到
+
+$$
+
+\begin{aligned}
+
+[n=1]&amp;=\sum_{d|n}\mu\left(d\right)I\left(\dfrac nd\right) \\ 
+&amp;=\sum_{d|n}\mu\left(d\right)
+
+\end{aligned}
+
+$$
+
+将其代入到原式当中去，可以得到
+
+$$
+\begin{aligned}
+
+&amp;\quad\sum_{i=1}^n\sum_{j=1}^m[\gcd\left(i,j\right)=1] \\ 
+&amp;=\sum_{i=1}^n\sum_{j=1}^m\sum_{d|\gcd\left(i,j\right)}\mu\left(d\right) \\ 
+&amp;=\sum_{i=1}^n\sum_{j=1}^m\sum_{d|i \&amp;d|j}\mu\left(d\right) \\ 
+\end{aligned}
+$$
+
+
+这边容易得到，$d$ 的取值范围是 $[1,n]$。然后 $i,j$ 都是 $d$ 的倍数。我们枚举 $d$，$i,j$ 的取值范围是 $\left[1,\left\lfloor\dfrac{n}{d}\right\rfloor\right]$ 和 $\left[1,\left\lfloor\dfrac{m}{d}\right\rfloor\right]$，上式变为：
+
+$$
+\begin{aligned}
+&amp;\quad\sum_{d=1}^n\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\mu\left(d\right)\\ 
+&amp;=\sum_{d=1}^n\mu\left(d\right)\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}1 \\
+&amp;=\sum_{d=1}^n\mu\left(d\right)\left\lfloor\dfrac{n}{d}\right\rfloor \left\lfloor\dfrac{m}{d}\right\rfloor \\
+\end{aligned}
+$$
+
+这是一个很明显的二维整除分块，只要先筛出 $\mu$ 的前缀和就可以了。
+
+如果你使用线性筛来筛前缀和，时间复杂度为 $n+\sqrt n$；
+
+如果你使用普通杜教筛来筛前缀和，时间复杂度为 $n^{\frac34}+\sqrt n$；
+
+如果你使用线性筛优化的杜教筛来筛前缀和的话，时间复杂度就可以达到 $n^{\frac23}+\sqrt n$。
+
+这是莫比乌斯反演的主要内容。
+
+# 杜教筛
+
+杜教筛用来在亚线性时间复杂度内求积性函数的前缀和。
+
+如果你要求 $\sum\limits_{i=1}^n f\left(i\right)$，并且 $n\ge 10^9$ 时，杜教筛是个不错的选择。（$f\left(i\right)$ 为积性函数）
+
+设 $\sum\limits_{i=1}^n f\left(i\right) = S\left(n\right)$。
+
+考虑找另一个积性函数 $g$，求 $f*g$ 的前缀和。
+
+有：
+
+$$
+\begin{aligned}
+&amp;\quad \sum_{i=1}^n\left(f*g\right)\left(i\right) \\
+&amp;=\sum_{i=1}^n\sum_{d|n}f\left(d\right)g\left(\dfrac nd\right) \\ 
+&amp;=\sum_{d=1}^ng\left(d\right)\sum_{i=1}^{\left\lfloor\frac nd\right\rfloor}f\left(i\right) \\ 
+&amp;=\sum_{d=1}^ng\left(d\right)S\left(\left\lfloor\frac nd\right\rfloor\right)
+\end{aligned}
+$$
+
+因为 $g$ 是积性函数，所以 $g\left(1\right)=1$。
+
+考虑 $S\left(n\right)$ 等于什么。
+
+有 $S\left(n\right)=S\left(\left\lfloor\dfrac n1\right\rfloor\right)$。
+
+所以
+
+$$
+\begin{aligned}
+S\left(n\right)=&amp;\dfrac{\sum\limits_{d=1}^ng\left(d\right)S\left(\left\lfloor\frac nd\right\rfloor\right)-\sum\limits_{d=2}^ng\left(d\right)S\left(\left\lfloor\frac nd\right\rfloor\right)}{g\left(1\right)} \\
+=&amp;\dfrac{\sum\limits_{i=1}^n\left(f*g\right)\left(i\right)-\sum\limits_{d=2}^ng\left(d\right)S\left(\left\lfloor\frac nd\right\rfloor\right)}{g\left(1\right)}
+\end{aligned}
+$$
+
+也就是说，如果我们能找到一个 $g$ 使得 $f*g$ 和 $g$ 的前缀和可以很快算出来，那么这就意味着这道题已经变成了整除分块问题。
+
+杜教筛的基础时间复杂度是 $O\left(n^{\frac34}\right)$。当然，你也可以使用线性筛先把前 $k$ 个答案算出来，时间复杂度降至 $O\left(\dfrac{n}{\sqrt k}\right)$。
+
+## 例题：[【模板】杜教筛](https://www.luogu.com.cn/problem/P4213)
+
+题目就是求 $\varphi$ 和 $\mu$ 的前缀和。
+
+### 如何求 $\sum\limits_{i=1}^n\varphi\left(i\right)$？
+
+根据常用狄利克雷卷积，可以得到 $\varphi*I=id$。而 $I$ 和 $id$ 的前缀和显然是好求的：
+
+$$\sum_{i=1}^nI\left(i\right)=n$$
+
+$$\sum_{i=1}^nid\left(i\right)=\dfrac12n\left(n+1\right)$$
+
+于是带进去式子，递归整除分块，就做完了。
+
+### 如何求 $\sum\limits_{i=1}^n\mu\left(i\right)$？
+
+同样，有 $\mu*I=e$。这个显然更加好求：
+
+$$\sum_{i=1}^nI\left(i\right)=n$$
+
+$$\sum_{i=1}^ne\left(i\right)=1$$
+
+同理，递归整除分块，搞定。
+
+# Min-25 筛
+
+不会。咕着先，或者让 cjld 教吧（
+
+# 类欧几里得算法
+
+~~类欧是一个很恐怖的东西，请确保你对一长串公式没有过敏或者其他恶心症状，才继续往下读。否则后果自负~~
+
+具体的，大部分类欧就是让你快速求一个带有下取整的变量在分子中的求和式。
+
+类欧的基础从下面三个式子开始：
+
+$$f\left(a,b,c,n\right)=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c} \right\rfloor$$
+
+$$g\left(a,b,c,n\right)=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c} \right\rfloor^2$$
+
+$$h\left(a,b,c,n\right)=\sum_{i=0}^{n}i\left\lfloor \frac{ai+b}{c} \right\rfloor$$
+
+## $f$ 函数的化简
+
+定义函数 
+
+$$f\left(a,b,c,n\right)=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor$$
+
+- ### 当 $a=0$ 时：
+
+$$
+\begin{aligned}
+f\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor \\ 
+&amp;=\sum_{i=0}^{n}\left\lfloor \frac{b}{c}\right\rfloor \\
+&amp;=\left(n+1\right)\left\lfloor \frac{b}{c}\right\rfloor \\
+\end{aligned}
+$$
+
+- ### 当 $a\ge c$ 或 $b\ge c$ 时：
+
+$$
+\begin{aligned}
+f\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor \\ 
+&amp;=\sum_{i=0}^{n}\left\lfloor \frac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor+\left\lfloor\frac ac\right\rfloor i+\left\lfloor\frac bc\right\rfloor \\ 
+&amp;=\frac12n\left(n+1\right)\left\lfloor \frac ac \right\rfloor + \left(n+1\right)\left\lfloor\frac bc\right\rfloor+\sum_{i=0}^{n}\left\lfloor \frac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor\\ 
+&amp;=\frac12n\left(n+1\right)\left\lfloor \frac ac \right\rfloor + \left(n+1\right)\left\lfloor\frac bc\right\rfloor+f\left(a\bmod c,b\bmod c,c,n\right)\\ 
+\end{aligned}
+$$
+
+- ### 当 $a &lt;c$ 且 $b &lt;c$ 时：
+
+设 $m=\left\lfloor\dfrac{an+b}{c}\right\rfloor$。
+
+$$
+\begin{aligned}
+f\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \dfrac{ai+b}{c}\right\rfloor \\ 
+&amp;= \sum_{i=0}^{n}\sum_{j=1}^{m}\left[j\le \frac{ai+b}{c}\right] \\ 
+&amp;= \sum_{i=0}^{n}\sum_{j=1}^{m}\left[jc\le ai+b\right] \\ 
+&amp;= \sum_{i=0}^{n}\sum_{j=1}^{m}\left[jc\lt ai+b+1\right] \\ 
+&amp;= \sum_{i=0}^{n}\sum_{j=0}^{m-1}\left[jc+c\lt ai+b+1\right] \\ 
+&amp;= \sum_{j=0}^{m-1}\sum_{i=0}^{n}\left[i &gt;\frac{cj+c-b-1}{a}\right] \\ 
+&amp;= \sum_{j=0}^{m-1}n-\frac{cj+c-b-1}{a} \\ 
+&amp;= nm-f\left(c,c-b-1,a,m-1\right)
+\end{aligned}
+$$
+
+综上，有
+
+$$
+f\left(a,b,c,n\right)=
+\begin{aligned}
+\begin{cases}
+\left(n+1\right)\left\lfloor\dfrac bc\right\rfloor &amp;\left(a=0\right) \\
+\frac12n\left(n+1\right)\left\lfloor \dfrac ac \right\rfloor + \left(n+1\right)\left\lfloor\dfrac bc\right\rfloor+f\left(a\bmod c,b\bmod c,c,n\right)&amp;\left(a\ge c \ |\  b\ge c\right) \\
+nm-f\left(c,c-b-1,a,m-1\right)&amp;\left(a &lt;c\ \&amp;\ b &lt;c\ \&amp;\ a\ne 0\right) \\
+\end{cases}
+\end{aligned}
+$$
+
+## $g$ 函数的化简
+
+定义函数 
+
+$$g\left(a,b,c,n\right)=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor^2$$
+
+- ### 当 $a=0$ 时：
+
+$$
+\begin{aligned}
+g\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor^2 \\ 
+&amp;=\sum_{i=0}^{n}\left\lfloor \frac{b}{c}\right\rfloor^2 \\ 
+&amp;=\left(n+1\right)\left\lfloor \frac{b}{c}\right\rfloor^2
+\end{aligned}
+$$
+
+- ### 当 $a\ge c$ 或 $b\ge c$ 时：
+
+$$
+\begin{aligned}
+g\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor^2 \\ 
+&amp;= \sum_{i=0}^{n}\left\lfloor\dfrac{\left(a-c\times \left\lfloor\dfrac{a}{c}\right\rfloor\right)i+c\times \left\lfloor\dfrac{a}{c}\right\rfloor i+\left(b-c\times \left\lfloor\dfrac{b}{c}\right\rfloor\right)+c\times \left\lfloor\dfrac{b}{c}\right\rfloor}{c}\right\rfloor^2 \\ 
+&amp;= \sum_{i=0}^{n}\left\lfloor\dfrac{\left(a-c\times \left\lfloor\dfrac{a}{c}\right\rfloor\right)i+\left(b-c\times \left\lfloor\dfrac{b}{c}\right\rfloor\right)}{c}+\left\lfloor\dfrac{a}{c}\right\rfloor i+\left\lfloor\dfrac{b}{c}\right\rfloor\right\rfloor^2 \\ 
+&amp;= \sum_{i=0}^{n}\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}+\left\lfloor\dfrac{a}{c}\right\rfloor i+\left\lfloor\dfrac{b}{c}\right\rfloor\right\rfloor^2 \\ 
+&amp;= \sum_{i=0}^{n}\left(\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor+\left\lfloor\dfrac{a}{c}\right\rfloor i+\left\lfloor\dfrac{b}{c}\right\rfloor\right)^2 \\ 
+&amp;= \sum_{i=0}^{n}\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor^2+\left\lfloor\dfrac{a}{c}\right\rfloor^2 i^2+\left\lfloor\dfrac{b}{c}\right\rfloor^2+2\left\lfloor\dfrac{a}{c}\right\rfloor\left\lfloor\dfrac{b}{c}\right\rfloor i \\
+&amp;\quad +2\left\lfloor\dfrac{a}{c}\right\rfloor\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor i+2\left\lfloor\dfrac{b}{c}\right\rfloor\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor\\ 
+&amp;= \dfrac 16\left\lfloor\dfrac{a}{c}\right\rfloor^2 n\left(n+1\right)\left(2n+1\right)+\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor^2+\left\lfloor\dfrac{a}{c}\right\rfloor\left\lfloor\dfrac{b}{c}\right\rfloor n\left(n+1\right) \\
+&amp;\quad +2\left\lfloor\dfrac{a}{c}\right\rfloor\sum_{i=0}^n\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor i+2\left\lfloor\dfrac{b}{c}\right\rfloor\sum_{i=0}^n\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor+\sum_{i=0}^{n}\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor^2\\ 
+&amp;= \dfrac 16\left\lfloor\dfrac{a}{c}\right\rfloor^2 n\left(n+1\right)\left(2n+1\right)+\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor^2+\left\lfloor\dfrac{a}{c}\right\rfloor\left\lfloor\dfrac{b}{c}\right\rfloor n\left(n+1\right)\\
+&amp;\quad +2\left\lfloor\dfrac{a}{c}\right\rfloor h\left(a\bmod c, b\bmod c, c, n\right)+2\left\lfloor\dfrac{b}{c}\right\rfloor f\left(a\bmod c, b\bmod c, c, n\right)+g\left(a\bmod c, b\bmod c, c, n\right)\\ 
+\end{aligned} 
+$$
+
+- ### 当 $a &lt;c$ 且 $b &lt;c$ 时：
+
+设 $m=\left\lfloor\dfrac{an+b}{c}\right\rfloor$。
+
+$$
+\begin{aligned}
+g\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor^2 \\ 
+&amp;= \sum_{i=0}^n\left(2\times \dfrac 12 \left\lfloor \frac{ai+b}{c}\right\rfloor\left(\left\lfloor \frac{ai+b}{c}\right\rfloor+1\right)-\left\lfloor \frac{ai+b}{c}\right\rfloor\right) \\
+&amp;= \sum_{i=0}^n\left(2\sum_{j=1}^{\left\lfloor \frac{ai+b}{c}\right\rfloor}j-\left\lfloor \frac{ai+b}{c}\right\rfloor\right) \\
+&amp;= \sum_{i=0}^n\left(2\sum_{j=1}^{m}j\left[j\le \frac{ai+b}{c}\right]-\left\lfloor \frac{ai+b}{c}\right\rfloor\right) \\
+&amp;= \sum_{i=0}^n\left(2\sum_{j=1}^{m}j\left[jc\le ai+b\right]-\left\lfloor \frac{ai+b}{c}\right\rfloor\right) \\
+&amp;= 2\sum_{i=0}^n\sum_{j=1}^{m}j\left[jc\le ai+b\right]-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{i=0}^n\sum_{j=0}^{m-1}\left(j+1\right)\left[jc+c\lt ai+b+1\right]-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{i=0}^n\sum_{j=0}^{m-1}\left(j+1\right)\left[i &gt;\dfrac{jc+c-b-1}{a}\right]-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{j=0}^{m-1}\left(j+1\right)\sum_{i=0}^n\left[i &gt;\dfrac{jc+c-b-1}{a}\right]-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{j=0}^{m-1}\left(j+1\right)\left(n-\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\right)-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{j=0}^{m-1}j\left(n-\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\right)+2\sum_{j=0}^{m-1}\left(n-\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\right)-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{j=0}^{m-1}nj-2\sum_{j=0}^{m-1}j\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor+2\sum_{j=0}^{m-1}n-2\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\left(\sum_{j=0}^{m-1}nj+2\sum_{j=0}^{m-1}n\right)-2\sum_{j=0}^{m-1}j\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-2\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{j=0}^{m-1}n\left(j+1\right)-2\sum_{j=0}^{m-1}j\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-2\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2n\sum_{j=1}^{m}j-2\sum_{j=0}^{m-1}j\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-2\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= nm\left(m+1\right)-2h\left(c,c-b-1,a,m-1\right)-2f\left(c,c-b-1,a,m-1\right)-f\left(a,b,c,n\right) \\
+\end{aligned}
+$$
+
+综上，有
+
+$$
+g\left(a,b,c,n\right)=
+\begin{aligned}
+\begin{cases}
+
+\left(n+1\right)\left\lfloor \dfrac{b}{c}\right\rfloor^2 &amp;\left(a=0\right) \\
+
+\dfrac 16\left\lfloor\dfrac{a}{c}\right\rfloor^2 n\left(n+1\right)\left(2n+1\right)+\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor^2+\left\lfloor\dfrac{a}{c}\right\rfloor\left\lfloor\dfrac{b}{c}\right\rfloor n\left(n+1\right) \\
+\quad +2\left\lfloor\dfrac{a}{c}\right\rfloor h\left(a\bmod c, b\bmod c, c, n\right)+2\left\lfloor\dfrac{b}{c}\right\rfloor f\left(a\bmod c, b\bmod c, c, n\right)+g\left(a\bmod c, b\bmod c, c, n\right) &amp;\left(a\ge c\ | \ b\ge c\right) \\
+
+nm\left(m+1\right)-2h\left(c,c-b-1,a,m-1\right)-2f\left(c,c-b-1,a,m-1\right)-f\left(a,b,c,n\right) &amp;\left(a &lt;c\ \&amp;\ b &lt;c\right)
+
+\end{cases}
+\end{aligned}
+$$
+
+## $h$ 函数的化简
+
+定义函数 
+
+$$h\left(a,b,c,n\right)=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor i$$
+
+- ### 当 $a=0$ 时：
+
+$$
+\begin{aligned}
+h\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor i \\ 
+&amp;=\sum_{i=0}^{n}\left\lfloor \frac{b}{c}\right\rfloor i\\ 
+&amp;=\dfrac 12n\left(n+1\right)\left\lfloor \frac{b}{c}\right\rfloor
+\end{aligned}
+$$
+
+- ### 当 $a\ge c$ 或者 $b\ge c$ 时：
+
+$$
+\begin{aligned}
+h\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor i \\ 
+&amp;= \sum_{i=0}^n\left\lfloor \dfrac{\left(a-c\times \left\lfloor\dfrac{a}{c}\right\rfloor\right)i+c\times \left\lfloor\dfrac{a}{c}\right\rfloor i+\left(b-c\times \left\lfloor\dfrac{b}{c}\right\rfloor\right)+c\times \left\lfloor\dfrac{b}{c}\right\rfloor}{c} \right\rfloor i \\
+&amp;= \sum_{i=0}^n\left\lfloor \dfrac{\left(a-c\times \left\lfloor\dfrac{a}{c}\right\rfloor\right)i+\left(b-c\times \left\lfloor\dfrac{b}{c}\right\rfloor\right)}{c}+\left\lfloor\dfrac{a}{c}\right\rfloor i +\left\lfloor\dfrac{b}{c}\right\rfloor\right\rfloor i \\
+&amp;= \sum_{i=0}^n\left\lfloor \dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor i+\left\lfloor\dfrac{a}{c}\right\rfloor i^2 +\left\lfloor\dfrac{b}{c}\right\rfloor i \\
+&amp;= \sum_{i=0}^n\left\lfloor \dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor i+\sum_{i=0}^n\left\lfloor\dfrac{a}{c}\right\rfloor i^2 +\sum_{i=0}^n\left\lfloor\dfrac{b}{c}\right\rfloor i \\
+&amp;= \dfrac16n\left(n+1\right)\left(2n+1\right)\left\lfloor\dfrac{a}{c}\right\rfloor +\dfrac12 n\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor+\sum_{i=0}^n\left\lfloor \dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor i \\
+&amp;= \dfrac16n\left(n+1\right)\left(2n+1\right)\left\lfloor\dfrac{a}{c}\right\rfloor +\dfrac12 n\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor+h\left(a\bmod c, b\bmod c, c, n\right) \\
+\end{aligned}
+$$
+
+- ### 当 $a &lt;c$ 且 $b &lt;c$ 时：
+
+设 $m=\left\lfloor\dfrac{an+b}{c}\right\rfloor$。
+ 
+$$
+\begin{aligned}
+h\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor i \\ 
+&amp;=\sum_{i=0}^ni\sum_{j=1}^m\left[j\le \dfrac{ai+b}{c}\right] \\
+&amp;=\sum_{i=0}^ni\sum_{j=1}^m\left[jc\le ai+b\right] \\
+&amp;=\sum_{i=0}^ni\sum_{j=1}^m\left[jc\lt ai+b+1\right] \\
+&amp;=\sum_{i=0}^ni\sum_{j=0}^{m-1}\left[jc+c\lt ai+b+1\right] \\
+&amp;=\sum_{i=0}^ni\sum_{j=0}^{m-1}\left[i &gt;\dfrac{jc+c-b-1}{a}\right] \\
+&amp;=\sum_{j=0}^{m-1}\sum_{i=0}^ni\left[i &gt;\dfrac{jc+c-b-1}{a}\right] \\
+&amp;=\sum_{j=0}^{m-1}\left(\sum_{i=0}^ni-\sum_{i=0}^ni\left[i\le \dfrac{jc+c-b-1}{a}\right] \right)\\
+&amp;=\sum_{j=0}^{m-1}\left(\dfrac12n\left(n+1\right)-\sum_{i=0}^ni\left[i\le \dfrac{jc+c-b-1}{a}\right] \right)\\
+&amp;=\sum_{j=0}^{m-1}\left(\dfrac12n\left(n+1\right)-\sum_{i=0}^{\left\lfloor\frac{jc+c-b-1}{a}\right\rfloor}i \right)\\
+&amp;=\sum_{j=0}^{m-1}\left(\dfrac12n\left(n+1\right)-\dfrac12\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\left(\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor+1\right)\right)\\
+&amp;=\dfrac12\sum_{j=0}^{m-1}n\left(n+1\right)-\dfrac12\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\left(\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor+1\right)\\
+&amp;=\dfrac12mn\left(n+1\right)-\dfrac12\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor^2-\dfrac12\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\\
+&amp;=\dfrac12mn\left(n+1\right)-\dfrac12g\left(c,c-b-1,a,m-1\right)-\dfrac12f\left(c,c-b-1,a,m-1\right)\\
+\end{aligned}
+$$
+
+综上，有
+
+$$
+h\left(a,b,c,n\right)=
+\begin{aligned}
+\begin{cases}
+
+\dfrac12n\left(n+1\right)\left\lfloor \dfrac{b}{c}\right\rfloor &amp;\left(a=0\right) \\
+
+\dfrac16n\left(n+1\right)\left(2n+1\right)\left\lfloor\dfrac{a}{c}\right\rfloor +\dfrac12 n\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor+h\left(a\bmod c, b\bmod c, c, n\right) &amp;\left(a\ge c\ | \ b\ge c\right) \\
+
+\dfrac12mn\left(n+1\right)-\dfrac12g\left(c,c-b-1,a,m-1\right)-\dfrac12f\left(c,c-b-1,a,m-1\right) &amp;\left(a &lt;c\ \&amp;\ b &lt;c\right)
+
+\end{cases}
+\end{aligned}
+$$
+
+以上对类欧的三个基本函数进行了详细的推导。
+
+## 例题：[P5172 Sum](https://www.luogu.com.cn/problem/P5172)
+
+在[这篇题解](https://ternarytree.blog.luogu.org/p5172-sum)中进行了介绍。
+
+如果你阅读到了这里，你的推式子能力已经过关了。接下来请见第二章：同余。
