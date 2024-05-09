@@ -14,7 +14,9 @@ extra:
     description: >- 
       我们使用 cookie 来识别您的重复访问和偏好以衡量我们文档的有效性以及用户找到他们正在搜索的内容。在您同意的情况下，您在帮助我们使我们的文档更好。
 nav:
-  - "简介" : "index.md"
+  - "欢迎" :
+    - "关于本站" :
+      - "简介" : "index.md"
   - "数学" :
     - "基础" :
-      - "学会推式子" : "math/xhtsz.md"
+      - "学会推式子" : "math/number-theory/basic.md"
