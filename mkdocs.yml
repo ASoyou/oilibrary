@@ -3,7 +3,7 @@ repo_url: https://github.com/ASoyou/oilibrary/
 theme:
   name: material
   palette:
-    primary: grey
+    primary: black
   language: zh
   features:
     - navigation.tabs
@@ -32,8 +32,12 @@ nav:
       - "简介" : "index.md"
       - "学术规范" : "rules.md"
   - "数学" :
+    - "引言" : "math/index.md"
     - "数论" :
-      - "基础" : "math/number-theory/basic1.md"
+      - "基础" : 
+        - "数论基础1：学会推式子" : "math/number-theory/basic/1.md"
+      - "莫比乌斯反演" :
+        - "莫反1：让我们从基础开始" : "math/number-theory/mobius/1.md"
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true

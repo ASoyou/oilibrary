@@ -31,3 +31,5 @@ $$\Huge{\texttt{Welcome to Soil OIlibrary!}}$$
 其格式必须遵守[洛谷主题库题解规范]()的格式要求，内容需要有价值。
 
 关于更多的 Markdown 语法，请查看 [Markdown 部分]()。
+
+$1+1=2$
