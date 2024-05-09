@@ -1,0 +1,1763 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../../">
+      
+      
+        <link rel="next" href="../../mobius/1/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.21">
+    
+    
+      
+        <title>数论基础1：学会推式子 - Soil OI 资料库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.66ac8b77.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h224V368c0-26.5 21.5-48 48-48h112V96c0-35.3-28.7-64-64-64H64zm384 320H336c-8.8 0-16 7.2-16 16v112l32-32 64-64 32-32z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M96 0C43 0 0 43 0 96v320c0 53 43 96 96 96h320c17.7 0 32-14.3 32-32s-14.3-32-32-32v-64c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H96zm0 384h256v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16h192c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48h192c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zm-40-176h24v-64h-24c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-80c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M480 32c0-12.9-7.8-24.6-19.8-29.6S434.5.2 425.3 9.3L381.7 53c-48 48-113.1 75-181 75H64c-35.3 0-64 28.7-64 64v96c0 35.3 28.7 64 64 64v128c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32V352h8.7c67.9 0 133 27 181 75l43.6 43.6c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V300.4c18.6-8.8 32-32.5 32-60.4s-13.4-51.6-32-60.4V32zm-64 76.7v262.6C357.2 317.8 280.5 288 200.7 288H192v-96h8.7c79.8 0 156.5-29.8 215.3-83.3z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zm-86.2-346.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1 0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6-13.3 0-24-10.7-24-24v-13.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1 0-8.4-6.8-15.1-15.1-15.1h-58.3c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1-64 0z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7.2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8.2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24v112c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0-64 0 32 32 0 1 0 64 0z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.1 52.4 442.6 6.5c-1.9-3.9-6.1-6.5-10.5-6.5s-8.5 2.6-10.4 6.5l-16.5 45.9-46 16.8c-4.3 1.6-7.3 5.9-7.2 10.4 0 4.5 3 8.7 7.2 10.2l45.7 16.8 16.8 45.8c1.5 4.4 5.8 7.5 10.4 7.5s8.9-3.1 10.4-7.5l16.5-45.8 45.7-16.8c4.2-1.5 7.2-5.7 7.2-10.2 0-4.6-3-8.9-7.2-10.4l-45.6-16.8zm-132.4 53c-12.5-12.5-32.8-12.5-45.3 0l-2.9 2.9c-22-8-45.8-12.3-70.5-12.3C93.1 96 0 189.1 0 304s93.1 208 208 208 208-93.1 208-208c0-24.7-4.3-48.5-12.2-70.5l2.9-2.9c12.5-12.5 12.5-32.8 0-45.3l-80-80zM200 192c-57.4 0-104 46.6-104 104v8c0 8.8-7.2 16-16 16s-16-7.2-16-16v-8c0-75.1 60.9-136 136-136h8c8.8 0 16 7.2 16 16s-7.2 16-16 16h-8z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 398.9c58.5-41.1 96-104.1 96-174.9C512 100.3 397.4 0 256 0S0 100.3 0 224c0 70.7 37.5 133.8 96 174.9V464c0 26.5 21.5 48 48 48h48v-48c0-8.8 7.2-16 16-16s16 7.2 16 16v48h64v-48c0-8.8 7.2-16 16-16s16 7.2 16 16v48h48c26.5 0 48-21.5 48-48v-65.1zM96 256a64 64 0 1 1 128 0 64 64 0 1 1-128 0zm256-64a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M320 0c17.7 0 32 14.3 32 32v64h120c39.8 0 72 32.2 72 72v272c0 39.8-32.2 72-72 72H168c-39.8 0-72-32.2-72-72V168c0-39.8 32.2-72 72-72h120V32c0-17.7 14.3-32 32-32zM208 384c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-32zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-32zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-32zM264 256a40 40 0 1 0-80 0 40 40 0 1 0 80 0zm152 40a40 40 0 1 0 0-80 40 40 0 1 0 0 80zM48 224h16v192H48c-26.5 0-48-21.5-48-48v-96c0-26.5 21.5-48 48-48zm544 0c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48h-16V224h16z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M288 0H128c-17.7 0-32 14.3-32 32s14.3 32 32 32v132.8c0 11.8-3.3 23.5-9.5 33.5L10.3 406.2C3.6 417.2 0 429.7 0 442.6 0 480.9 31.1 512 69.4 512h309.2c38.3 0 69.4-31.1 69.4-69.4 0-12.8-3.6-25.4-10.3-36.4L329.5 230.4c-6.2-10.1-9.5-21.7-9.5-33.5V64c17.7 0 32-14.3 32-32S337.7 0 320 0h-32zm-96 196.8V64h64v132.8c0 23.7 6.6 46.9 19 67.1l34.5 56.1h-171l34.5-56.1c12.4-20.2 19-43.4 19-67.1z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64V216z"/></svg>');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="Soil OI 资料库" class="md-header__button md-logo" aria-label="Soil OI 资料库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Soil OI 资料库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              数论基础1：学会推式子
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ASoyou/oilibrary/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../.." class="md-tabs__link">
+          
+  
+  欢迎
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../" class="md-tabs__link">
+          
+  
+  数学
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Soil OI 资料库" class="md-nav__button md-logo" aria-label="Soil OI 资料库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Soil OI 资料库
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ASoyou/oilibrary/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    欢迎
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            欢迎
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_1" id="__nav_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    关于本站
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            关于本站
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../rules/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    学术规范
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    数学
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            数学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    引言
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数论
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            数论
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    基础
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    数论基础1：学会推式子
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    数论基础1：学会推式子
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      取模
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="取模">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      取模的性质
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      整除：
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      判断
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      求和符号：
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="求和符号：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      性质
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      常用求和式转非求和式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      求积符号
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      唯一分解
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      最大公约数和最小公倍数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="最大公约数和最小公倍数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gcd-operatornamelcm" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(\gcd\) 和 \(\operatorname{lcm}\) 的性质：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      完全积性函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      积性函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~~没什么用的~~常用函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      确实好用的常用函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    莫比乌斯反演
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            莫比乌斯反演
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mobius/1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    莫反1：让我们从基础开始
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      取模
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="取模">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      取模的性质
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      整除：
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      判断
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      求和符号：
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="求和符号：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      性质
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      常用求和式转非求和式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      求积符号
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      唯一分解
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      最大公约数和最小公倍数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="最大公约数和最小公倍数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gcd-operatornamelcm" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(\gcd\) 和 \(\operatorname{lcm}\) 的性质：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      完全积性函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      积性函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~~没什么用的~~常用函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      确实好用的常用函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<div class="admonition tip">
+<p class="admonition-title">本文出处</p>
+<p>本文来源于 <a href="https://www.luogu.com/article/oqctj6kq">洛谷专栏</a>，作者 <a href="https://www.luogu.com/user/362750">洛谷@TernaryTree</a>。</p>
+<p>原名：<strong>数学数论第一章之学会推式子</strong></p>
+</div>
+<p>2022.7.20 动工。</p>
+<p>2022.7.22 基本完工。</p>
+<p>2022.7.22 修缮了部分不规范 <span class="arithmatex">\(\LaTeX\)</span> 以及 <span class="arithmatex">\(\KaTeX\)</span>。</p>
+<p>2022.7.22 修复了一些 typo。</p>
+<p>2022.9.23 修复了一些 typo。</p>
+<h1 id="_1">基础知识</h1>
+<h2 id="_2">取模</h2>
+<p><span class="arithmatex">\(a\bmod b\)</span> 表示 <span class="arithmatex">\(a\)</span> 除以 <span class="arithmatex">\(b\)</span> 的余数。</p>
+<h3 id="_3">取模的性质</h3>
+<div class="arithmatex">\[a\bmod b=a-b\times\left\lfloor\dfrac ab\right\rfloor\]</div>
+<div class="arithmatex">\[\left(a\bmod c+b\bmod c\right) \bmod c=\left(a+b\right)\bmod c\]</div>
+<div class="arithmatex">\[\left(a\bmod c\right)\left(b\bmod c\right) \bmod c=ab\bmod c\]</div>
+<h2 id="_4">整除：</h2>
+<p>通常用 <span class="arithmatex">\(a|b\)</span> 表示，表示 <span class="arithmatex">\(a\)</span> 是 <span class="arithmatex">\(b\)</span> 的因数，也可以转换成 <span class="arithmatex">\(b\equiv 0\pmod a\)</span>。同余方程在第二章会讲。</p>
+<h2 id="_5">判断</h2>
+<p>这个东西我忘了其真名是什么了，就暂且叫它判断吧。</p>
+<p>是一个用中括号括起来的东西，里面是一个等式，不等式或者等等。</p>
+<p>如果里面的东西成立，其值为 <span class="arithmatex">\(1\)</span>，否则为 <span class="arithmatex">\(0\)</span>，就类似于一个 <span class="arithmatex">\(\tt bool\)</span> 值。</p>
+<p>类似于 <span class="arithmatex">\(\left[n\ne1\right]\)</span>，<span class="arithmatex">\(\left[i^j\equiv 1\pmod p\right]\)</span> 等等。</p>
+<p>这个东西常和求和符号配合使用。</p>
+<h2 id="_6">求和符号：</h2>
+<h3 id="_7">定义</h3>
+<div class="arithmatex">\[\sum_{\tt beginning}^{\tt ending}\tt expressions\]</div>
+<p>其中，<span class="arithmatex">\(\tt beginning\)</span> 要声明一个变量，类似于：<span class="arithmatex">\(\sum\limits_{i=1}\)</span> 或者 <span class="arithmatex">\(\sum\limits_{d|n}\)</span>。前者表示 <span class="arithmatex">\(i\)</span> 初值为 <span class="arithmatex">\(1\)</span>，每次求和后 <span class="arithmatex">\(+1\)</span>；后者表示枚举 <span class="arithmatex">\(n\)</span> 的全部因数 <span class="arithmatex">\(d\)</span>。</p>
+<p><span class="arithmatex">\(\tt ending\)</span> 表示循环求和的结束条件，注意这里在求和的时候还是包含 <span class="arithmatex">\(\tt ending\)</span> 对应的值的。在某些情况下也可以不写（例如上面提到的 <span class="arithmatex">\(\sum\limits_{d|n}\)</span>，这里就可以不用写 <span class="arithmatex">\(\tt ending\)</span>，因为枚举的个数是有限的）。</p>
+<p><span class="arithmatex">\(\tt expressions\)</span> 表示你要求和什么。一般是一个带有 <span class="arithmatex">\(\tt beginning\)</span> 中声明变量的表达式，当然没有也没关系，可以化简，下文会提到。这个 <span class="arithmatex">\(\tt expressions\)</span> 有时候不算好理解。我举个栗子：</p>
+<div class="arithmatex">\[\sum_{i=1}^n ia_i\]</div>
+<p>上面这个式子表示什么呢？我把它展开一下就是：</p>
+<div class="arithmatex">\[1a_1+2a_2+3a_3+4a_4+\dots +na_n\]</div>
+<p>抑或是：</p>
+<div class="arithmatex">\[\sum_{d|12}da_d\]</div>
+<p>相当于枚举 <span class="arithmatex">\(12\)</span> 的所有因数，也就是</p>
+<div class="arithmatex">\[1a_1+2a_2+3a_3+4a_4+6a_6+12a_{12}\]</div>
+<p>这下你大概率是听懂了吧。</p>
+<h3 id="_8">性质</h3>
+<p>当有常数项的时候，可以提出来：（分配律）</p>
+<div class="arithmatex">\[\sum_{i=1}^n ai=a\sum_{i=1}^n i\]</div>
+<p>如果没有变量的时候，整个化成非求和式：（乘法）</p>
+<div class="arithmatex">\[\sum_{i=1}^nm=nm\]</div>
+<p>还有各种性质，到后文再给大家讲吧。</p>
+<h3 id="_9">常用求和式转非求和式</h3>
+<div class="arithmatex">\[\sum_{i=1}^ni=\dfrac12n\left(n+1\right)\]</div>
+<div class="arithmatex">\[\sum_{i=1}^ni^2=\dfrac16n\left(n+1\right)\left(2n+1\right)\]</div>
+<div class="arithmatex">\[\sum_{i=1}^ni^3=\dfrac14n^2\left(n+1\right)^2\]</div>
+<p>上面三个要背下来。除非你会拉格朗日插值考场上算，不然必须得背下来。这三个式子在学整除分块的时候很好用。</p>
+<h2 id="_10">求积符号</h2>
+<p>这个符号：</p>
+<div class="arithmatex">\[\prod_{\tt beginning}^{\tt ending}\tt expressions\]</div>
+<p>跟求和符号差不多，只是把加法换成了乘法。用的不多，先不讲，咕着吧。</p>
+<h2 id="_11">唯一分解</h2>
+<p>对于任意一个正整数 <span class="arithmatex">\(n\)</span>，都可以被唯一地分解为几个质数的积的形式。一般一个正整数的唯一分解式是这个样子的：</p>
+<div class="arithmatex">\[n=\prod p_i^{k_i}\]</div>
+<p>其中 <span class="arithmatex">\(p_i\)</span> 表示质数，<span class="arithmatex">\(k_i\)</span> 表示相应的次数。</p>
+<p>在 OI 中，对于单次分解，使用最最朴素的算法，可以做到 <span class="arithmatex">\(O\left(\sqrt n\right)\)</span>；对于多次分解，可以在 <span class="arithmatex">\(O\left(n+q\log n\right)\)</span> 的时间复杂度内完成分解，<span class="arithmatex">\(q\)</span> 代表询问次数。</p>
+<h2 id="_12">最大公约数和最小公倍数</h2>
+<p><span class="arithmatex">\(\gcd\left(a, b\right)\)</span> 表示 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 的最大公约数。</p>
+<p><span class="arithmatex">\(\operatorname{lcm}\left(a,b\right)\)</span> 表示 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 的最小公倍数。</p>
+<h3 id="gcd-operatornamelcm"><span class="arithmatex">\(\gcd\)</span> 和 <span class="arithmatex">\(\operatorname{lcm}\)</span> 的性质：</h3>
+<div class="arithmatex">\[\gcd\left(a,b\right)=\prod p_i^{\min\left(k_{i_a},k_{i_b}\right)}\]</div>
+<div class="arithmatex">\[\operatorname{lcm}\left(a,b\right)=\prod p_i^{\max\left(k_{i_a},k_{i_b}\right)}\]</div>
+<div class="arithmatex">\[\gcd\left(a,b\right)\operatorname{lcm}\left(a,b\right)=ab\]</div>
+<h2 id="_13">函数</h2>
+<p>函数大家肯定都会。这里讲函数从几方面来讲：完全积性函数和积性函数，以及常用的函数。</p>
+<h3 id="_14">完全积性函数</h3>
+<p><strong>对于一个完全积性函数，目前我们只要考虑整数就好了。其他小数分数虚数复数一律不管。</strong></p>
+<p>对于一个完全积性函数 <span class="arithmatex">\(f\left(x\right)\)</span>，必有 <span class="arithmatex">\(f\left(ab\right)=f\left(a\right)f\left(b\right)\)</span>。</p>
+<h3 id="_15">积性函数</h3>
+<p>这个比较重要。</p>
+<p>积性函数和完全积性函数有什么区别呢，在于定义。</p>
+<p>积性函数的定义是：</p>
+<p>对于一个积性函数 <span class="arithmatex">\(f\left(x\right)\)</span>，若有 <span class="arithmatex">\(\gcd\left(a,b\right)=1\)</span>（即 <span class="arithmatex">\(a,b\)</span> 互质），那么 <span class="arithmatex">\(f\left(ab\right)=f\left(a\right)f\left(b\right)\)</span>。</p>
+<h3 id="_16">~~没什么用的~~常用函数</h3>
+<ul>
+<li><span class="arithmatex">\(I\left(n\right)\)</span>：</li>
+</ul>
+<p>这是一个~~老顽固菜逼~~完全积性函数。无论什么情况下，<span class="arithmatex">\(I\left(n\right)\)</span> 的值都为 <span class="arithmatex">\(1\)</span>。你可能会问这个玩意有什么用，在讲后面狄利克雷卷积的时候你就知道了。</p>
+<ul>
+<li><span class="arithmatex">\(e\left(n\right)\)</span>：</li>
+</ul>
+<p>~~其实他函数名并不是这么打的，而是我不会打这玩意的 <span class="arithmatex">\(\LaTeX\)</span>。真正的函数名应该是类似于一个 <span class="arithmatex">\(\in\)</span> 的东西，但是不大一样。当然这样叫也可以，挺多人也是这样打的~~</p>
+<p>2022.7.22 upd: 知道了。是 <span class="arithmatex">\(\epsilon\)</span> <code>\epsilon</code>，但是懒得改了。</p>
+<p>是完全积性函数。<span class="arithmatex">\(e\left(n\right)=[n=1]\)</span>。也就是说，当 <span class="arithmatex">\(n\)</span> 为 <span class="arithmatex">\(1\)</span> 的时候 <span class="arithmatex">\(e\left(n\right)\)</span> 值为 <span class="arithmatex">\(1\)</span>，其他情况都为 <span class="arithmatex">\(0\)</span>。</p>
+<ul>
+<li><span class="arithmatex">\(id\left(n\right)\)</span></li>
+</ul>
+<p>完全积性函数。有 <span class="arithmatex">\(id\left(n\right)=n\)</span>，也就是自己。</p>
+<p>上面三个函数你现在看确实啥用没有，但是到后面可就用处大了。</p>
+<h3 id="_17">确实好用的常用函数</h3>
+<ul>
+<li><span class="arithmatex">\(\varphi\left(n\right)\)</span>：</li>
+</ul>
+<p>欧拉函数。是积性函数。有以下定义：</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(\varphi\left(n\right)=\sum_{i=1}^{n}\left[\gcd\left(i,n\right)=1\right]\)</span>\)</span></p>
+<p>也就是 <span class="arithmatex">\([1,n]\)</span> 之内与 <span class="arithmatex">\(n\)</span> 互质的整数的个数。</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(\varphi\left(n\right)=n\prod\left(1-\dfrac{1}{p_i}\right)\)</span>\)</span></p>
+<p>其中 <span class="arithmatex">\(p_i\)</span> 为互不相同的 <span class="arithmatex">\(n\)</span> 的唯一分解中的质数。</p>
+<p>单次求 <span class="arithmatex">\(\varphi\)</span> 可以做到 <span class="arithmatex">\(O\left(\sqrt n\right)\)</span> 的复杂度，当然使用线性筛法可以做到多次询问总时间复杂度 <span class="arithmatex">\(O\left(n+q\right)\)</span>。</p>
+<p>#### 例题：<a href="https://www.luogu.com.cn/problem/P2303">Longge 的问题</a></p>
+<p>题意：求 <span class="arithmatex">\(\sum\limits_{i=1}^n\gcd\left(i,n\right)\)</span>。<span class="arithmatex">\(n\lt 2^{32}\)</span>。</p>
+<p>一个比较基础的题目。推一下式子就搞定了，这里单点求 <span class="arithmatex">\(\varphi\)</span> 就可以。</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(\begin{aligned}
+  &amp;\sum_{i=1}^n\gcd\left(i,n\right)\\
+  =&amp;\sum_{i=1}^n\sum_{d|n,d|i}d[\gcd\left(i,n\right)=d] \\
+  =&amp;\sum_{d|n}d\sum_{i=1}^{\frac nd}\left[\gcd\left(id,n\right)=d\right] \\
+  =&amp;\sum_{d|n}d\sum_{i=1}^{\frac nd}\left[\gcd\left(i,\dfrac nd\right)=1\right] \\
+  =&amp;\sum_{d|n}d\times \varphi\left(\dfrac nd\right) \\
+  \end{aligned}\)</span>\)</span></p>
+<p>因为 <span class="arithmatex">\(\dfrac nd\)</span> 比较大，超出了线性筛的范围，所以使用单点求 <span class="arithmatex">\(\varphi\)</span>。</p>
+<ul>
+<li><span class="arithmatex">\(\mu\left(n\right)\)</span>：</li>
+</ul>
+<p>莫比乌斯函数。是积性函数。有以下定义：</p>
+<ul>
+<li>
+<p>当 <span class="arithmatex">\(n=1\)</span> 时，<span class="arithmatex">\(\mu\left(n\right)=1\)</span>。</p>
+</li>
+<li>
+<p>当 <span class="arithmatex">\(n\)</span> 的唯一分解式中的所有质数的次数都为 <span class="arithmatex">\(1\)</span> 时，<span class="arithmatex">\(\mu\left(n\right)\)</span> 为 <span class="arithmatex">\(-1\)</span> 的其质数种类次方。</p>
+</li>
+<li>
+<p>否则 <span class="arithmatex">\(\mu\left(n\right)= 0\)</span>。</p>
+</li>
+</ul>
+<p>同样使用线性筛法可以达到 <span class="arithmatex">\(O\left(n+q\right)\)</span> 的时间复杂度。</p>
+<p>莫比乌斯函数在正常情况下没有单独的特别用法，一般是在莫比乌斯反演中使用，后文中会提到。</p>
+<h1 id="_18">线性筛</h1>
+<p>最普通的筛法，也称欧拉筛，常用。时间复杂度 <span class="arithmatex">\(O\left(n\right)\)</span>。一般用于筛出质数和单点 <span class="arithmatex">\(\varphi\)</span>，<span class="arithmatex">\(\mu\)</span> 等等。</p>
+<ul>
+<li>筛 <span class="arithmatex">\(\varphi\)</span>：</li>
+</ul>
+<p>质数 <span class="arithmatex">\(p\)</span> 与小于自己的任何正整数互质，所以 <span class="arithmatex">\(\varphi\left(p\right)=p-1\)</span>；</p>
+<p>当一个数 <span class="arithmatex">\(x\)</span> 可以被分解为一个质数 <span class="arithmatex">\(a\)</span> 和一个与这个质数互质的数 <span class="arithmatex">\(b\)</span> 时，满足积性函数的性质，有 <span class="arithmatex">\(\varphi\left(x\right)=\varphi\left(a\right)\varphi\left(b\right)=\left(a-1\right)\varphi\left(b\right)\)</span>；</p>
+<p>否则，易得 <span class="arithmatex">\(a\ |\ b\)</span>，故 <span class="arithmatex">\(\varphi\left(x\right)=a\varphi\left(b\right)\)</span>。此为线性筛基本原理。</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">sieve</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">phi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">maxn</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">book</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">prime</span><span class="p">[</span><span class="o">++</span><span class="n">cnt</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">            </span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">maxn</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">book</span><span class="p">[</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">phi</span><span class="p">[</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">phi</span><span class="p">[</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>筛 <span class="arithmatex">\(\mu\)</span>：</li>
+</ul>
+<p>根据其定义很容易想到怎么筛。</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">sieve</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">mu</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">maxn</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">prime</span><span class="p">[</span><span class="o">++</span><span class="n">cnt</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">            </span><span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="n">maxn</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">                </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_19">埃氏筛</h1>
+<p>把线性筛里的那一行 <code>if (i % prime[j] == 0) break;</code> 去掉，就变成了埃氏筛。时间复杂度 <span class="arithmatex">\(O\left(n\log\log n\right)\)</span>。在数论题中不算常用，不过 NOIP2021 考了。</p>
+<h1 id="_20">狄利克雷卷积</h1>
+<p>定义两个函数 <span class="arithmatex">\(f,g\)</span> 的狄利克雷卷积为 <span class="arithmatex">\(f*g\)</span>，其自成一个函数。</p>
+<p>有：</p>
+<div class="arithmatex">\[\left(f*g\right)\left(n\right)=\sum_{d|n}f\left(d\right)g\left(\dfrac nd\right)\]</div>
+<p>记住这个式子。很常用。</p>
+<h2 id="_21">常用的狄利克雷卷积</h2>
+<div class="arithmatex">\[\mu*I=e\]</div>
+<div class="arithmatex">\[\varphi*I=id\]</div>
+<div class="arithmatex">\[\mu * id=\varphi\]</div>
+<div class="arithmatex">\[f*e=f\]</div>
+<p>等等。</p>
+<h1 id="_22">整除分块</h1>
+<p>整除分块是一个小技巧，常用于以变量为分母的整除式的求和。</p>
+<h2 id="_23">一维整除分块</h2>
+<p>最基础的整除分块是这样的：</p>
+<div class="arithmatex">\[\sum_{i=1}^n\left\lfloor \dfrac ni\right\rfloor\]</div>
+<p>暴力算的话时间复杂度是 <span class="arithmatex">\(O\left(n\right)\)</span> 的。有没有更好的解决方式呢？</p>
+<p>当 <span class="arithmatex">\(n=10\)</span> 的时候，我们根据 <span class="arithmatex">\(i\)</span> 的变化列一个表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(i\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\left\lfloor \dfrac ni\right\rfloor\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(10\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(2\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(5\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(3\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(3\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(4\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(5\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(6\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(7\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(8\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(9\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(10\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>可以看出来，<span class="arithmatex">\(1\)</span>，<span class="arithmatex">\(2\)</span>，<span class="arithmatex">\(3\)</span>，<span class="arithmatex">\(4\sim 5\)</span>，<span class="arithmatex">\(6\sim 10\)</span> 的值是一样的。对于这些每一块，我们之间使用乘法乘起来就好了。</p>
+<p>不难看出，对于左端点为 <span class="arithmatex">\(l\)</span> 的一块，其右端点为 <span class="arithmatex">\(\left\lfloor\dfrac{n}{\left\lfloor\dfrac nl\right\rfloor}\right\rfloor\)</span>。使用一个循环统计其值即可。</p>
+<p>通过某种玄学方式可以证明，一共有大概 <span class="arithmatex">\(\sqrt n\)</span> 块，也就是时间复杂度是 <span class="arithmatex">\(O\left(\sqrt n\right)\)</span> 级别的。</p>
+<p>附：伪代码</p>
+<div class="highlight"><pre><span></span><code>l = 1, r = 0, ans = 0
+while l &amp;lt;= n
+    r = n / (n / l)
+    ans += ...
+    l = r + 1
+</code></pre></div>
+<h3 id="p2261">例题：<a href="https://www.luogu.com.cn/problem/P2261">P2261 余数求和</a></h3>
+<p>题意：求 <span class="arithmatex">\(\sum\limits_{i=1}^{n}k\bmod i\)</span>。<span class="arithmatex">\(n,k\le 10^9\)</span>。</p>
+<p>根据取余的性质，可以得到原式等于</p>
+<div class="arithmatex">\[\sum_{i=1}^nk-i\times \left\lfloor \dfrac ki\right\rfloor\]</div>
+<p>也就是</p>
+<div class="arithmatex">\[nk-\sum_{i=1}^ni\times \left\lfloor \dfrac ki\right\rfloor\]</div>
+<p>右边整除分块即可。</p>
+<h2 id="_24">多维整除分块</h2>
+<p>如果式子变成这样：</p>
+<div class="arithmatex">\[\sum_{i=1}^k i\left\lfloor\dfrac ni \right\rfloor\left\lfloor\dfrac mi \right\rfloor\]</div>
+<p>出现了两个整除，普通的整除分块解决不了，怎么办呢？</p>
+<p>打个表，可以发现仍然出现了块状。</p>
+<p>所以实际上把代码中的 <code>r = n / (n / l)</code> 改成 <code>r = min(n / (n / l), m / (m / l))</code> 就完事了，然后 <code>ans</code> 在加的时候改一下就好了。</p>
+<h3 id="p2260">例题：<a href="https://www.luogu.com.cn/problem/P2260">P2260 模积和</a></h3>
+<p>题意：求 <span class="arithmatex">\(\sum\limits_{i=1}^n\sum\limits_{j=1}^m\left(n\bmod i\right)\left(m\bmod j\right)[i\ne j]\)</span>。</p>
+<p>直接展开，然后就是二维整除分块板子。</p>
+<h1 id="_25">莫比乌斯反演</h1>
+<p>对于一类求 <span class="arithmatex">\(\gcd\)</span> 和或者相似问题的时候，可以使用莫比乌斯反演。</p>
+<p>看一道基本例题：<a href="https://www.luogu.com.cn/problem/P2158">仪仗队</a></p>
+<p>这道题引出来一个最基本的莫比乌斯反演式子：</p>
+<div class="arithmatex">\[\sum_{i=1}^n\sum_{j=1}^m[\gcd\left(i,j\right)=1]\]</div>
+<p>看起来很像欧拉函数一类的东西，其实是莫比乌斯反演。</p>
+<p>我们由常用狄利克雷卷积的式子可以得到，</p>
+<div class="arithmatex">\[\mu*I=e\]</div>
+<p>然后我们取其定义，可以得到</p>
+<p>$$</p>
+<p>\begin{aligned}</p>
+<p>[n=1]&amp;=\sum_{d|n}\mu\left(d\right)I\left(\dfrac nd\right) \ 
+&amp;=\sum_{d|n}\mu\left(d\right)</p>
+<p>\end{aligned}</p>
+<p>$$</p>
+<p>将其代入到原式当中去，可以得到</p>
+<p>$$
+\begin{aligned}</p>
+<p>&amp;\quad\sum_{i=1}^n\sum_{j=1}^m[\gcd\left(i,j\right)=1] \ 
+&amp;=\sum_{i=1}^n\sum_{j=1}^m\sum_{d|\gcd\left(i,j\right)}\mu\left(d\right) \ 
+&amp;=\sum_{i=1}^n\sum_{j=1}^m\sum_{d|i \&amp;d|j}\mu\left(d\right) \ 
+\end{aligned}
+$$</p>
+<p>这边容易得到，<span class="arithmatex">\(d\)</span> 的取值范围是 <span class="arithmatex">\([1,n]\)</span>。然后 <span class="arithmatex">\(i,j\)</span> 都是 <span class="arithmatex">\(d\)</span> 的倍数。我们枚举 <span class="arithmatex">\(d\)</span>，<span class="arithmatex">\(i,j\)</span> 的取值范围是 <span class="arithmatex">\(\left[1,\left\lfloor\dfrac{n}{d}\right\rfloor\right]\)</span> 和 <span class="arithmatex">\(\left[1,\left\lfloor\dfrac{m}{d}\right\rfloor\right]\)</span>，上式变为：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp;\quad\sum_{d=1}^n\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}\mu\left(d\right)\\ 
+&amp;=\sum_{d=1}^n\mu\left(d\right)\sum_{i=1}^{\left\lfloor\frac{n}{d}\right\rfloor}\sum_{j=1}^{\left\lfloor\frac{m}{d}\right\rfloor}1 \\
+&amp;=\sum_{d=1}^n\mu\left(d\right)\left\lfloor\dfrac{n}{d}\right\rfloor \left\lfloor\dfrac{m}{d}\right\rfloor \\
+\end{aligned}
+\]</div>
+<p>这是一个很明显的二维整除分块，只要先筛出 <span class="arithmatex">\(\mu\)</span> 的前缀和就可以了。</p>
+<p>如果你使用线性筛来筛前缀和，时间复杂度为 <span class="arithmatex">\(n+\sqrt n\)</span>；</p>
+<p>如果你使用普通杜教筛来筛前缀和，时间复杂度为 <span class="arithmatex">\(n^{\frac34}+\sqrt n\)</span>；</p>
+<p>如果你使用线性筛优化的杜教筛来筛前缀和的话，时间复杂度就可以达到 <span class="arithmatex">\(n^{\frac23}+\sqrt n\)</span>。</p>
+<p>这是莫比乌斯反演的主要内容。</p>
+<h1 id="_26">杜教筛</h1>
+<p>杜教筛用来在亚线性时间复杂度内求积性函数的前缀和。</p>
+<p>如果你要求 <span class="arithmatex">\(\sum\limits_{i=1}^n f\left(i\right)\)</span>，并且 <span class="arithmatex">\(n\ge 10^9\)</span> 时，杜教筛是个不错的选择。（<span class="arithmatex">\(f\left(i\right)\)</span> 为积性函数）</p>
+<p>设 <span class="arithmatex">\(\sum\limits_{i=1}^n f\left(i\right) = S\left(n\right)\)</span>。</p>
+<p>考虑找另一个积性函数 <span class="arithmatex">\(g\)</span>，求 <span class="arithmatex">\(f*g\)</span> 的前缀和。</p>
+<p>有：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp;\quad \sum_{i=1}^n\left(f*g\right)\left(i\right) \\
+&amp;=\sum_{i=1}^n\sum_{d|n}f\left(d\right)g\left(\dfrac nd\right) \\ 
+&amp;=\sum_{d=1}^ng\left(d\right)\sum_{i=1}^{\left\lfloor\frac nd\right\rfloor}f\left(i\right) \\ 
+&amp;=\sum_{d=1}^ng\left(d\right)S\left(\left\lfloor\frac nd\right\rfloor\right)
+\end{aligned}
+\]</div>
+<p>因为 <span class="arithmatex">\(g\)</span> 是积性函数，所以 <span class="arithmatex">\(g\left(1\right)=1\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(S\left(n\right)\)</span> 等于什么。</p>
+<p>有 <span class="arithmatex">\(S\left(n\right)=S\left(\left\lfloor\dfrac n1\right\rfloor\right)\)</span>。</p>
+<p>所以</p>
+<div class="arithmatex">\[
+\begin{aligned}
+S\left(n\right)=&amp;\dfrac{\sum\limits_{d=1}^ng\left(d\right)S\left(\left\lfloor\frac nd\right\rfloor\right)-\sum\limits_{d=2}^ng\left(d\right)S\left(\left\lfloor\frac nd\right\rfloor\right)}{g\left(1\right)} \\
+=&amp;\dfrac{\sum\limits_{i=1}^n\left(f*g\right)\left(i\right)-\sum\limits_{d=2}^ng\left(d\right)S\left(\left\lfloor\frac nd\right\rfloor\right)}{g\left(1\right)}
+\end{aligned}
+\]</div>
+<p>也就是说，如果我们能找到一个 <span class="arithmatex">\(g\)</span> 使得 <span class="arithmatex">\(f*g\)</span> 和 <span class="arithmatex">\(g\)</span> 的前缀和可以很快算出来，那么这就意味着这道题已经变成了整除分块问题。</p>
+<p>杜教筛的基础时间复杂度是 <span class="arithmatex">\(O\left(n^{\frac34}\right)\)</span>。当然，你也可以使用线性筛先把前 <span class="arithmatex">\(k\)</span> 个答案算出来，时间复杂度降至 <span class="arithmatex">\(O\left(\dfrac{n}{\sqrt k}\right)\)</span>。</p>
+<h2 id="_27">例题：<a href="https://www.luogu.com.cn/problem/P4213">【模板】杜教筛</a></h2>
+<p>题目就是求 <span class="arithmatex">\(\varphi\)</span> 和 <span class="arithmatex">\(\mu\)</span> 的前缀和。</p>
+<h3 id="sumlimits_i1nvarphileftiright">如何求 <span class="arithmatex">\(\sum\limits_{i=1}^n\varphi\left(i\right)\)</span>？</h3>
+<p>根据常用狄利克雷卷积，可以得到 <span class="arithmatex">\(\varphi*I=id\)</span>。而 <span class="arithmatex">\(I\)</span> 和 <span class="arithmatex">\(id\)</span> 的前缀和显然是好求的：</p>
+<div class="arithmatex">\[\sum_{i=1}^nI\left(i\right)=n\]</div>
+<div class="arithmatex">\[\sum_{i=1}^nid\left(i\right)=\dfrac12n\left(n+1\right)\]</div>
+<p>于是带进去式子，递归整除分块，就做完了。</p>
+<h3 id="sumlimits_i1nmuleftiright">如何求 <span class="arithmatex">\(\sum\limits_{i=1}^n\mu\left(i\right)\)</span>？</h3>
+<p>同样，有 <span class="arithmatex">\(\mu*I=e\)</span>。这个显然更加好求：</p>
+<div class="arithmatex">\[\sum_{i=1}^nI\left(i\right)=n\]</div>
+<div class="arithmatex">\[\sum_{i=1}^ne\left(i\right)=1\]</div>
+<p>同理，递归整除分块，搞定。</p>
+<h1 id="min-25">Min-25 筛</h1>
+<p>不会。咕着先，或者让 cjld 教吧（</p>
+<h1 id="_28">类欧几里得算法</h1>
+<p>~~类欧是一个很恐怖的东西，请确保你对一长串公式没有过敏或者其他恶心症状，才继续往下读。否则后果自负~~</p>
+<p>具体的，大部分类欧就是让你快速求一个带有下取整的变量在分子中的求和式。</p>
+<p>类欧的基础从下面三个式子开始：</p>
+<div class="arithmatex">\[f\left(a,b,c,n\right)=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c} \right\rfloor\]</div>
+<div class="arithmatex">\[g\left(a,b,c,n\right)=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c} \right\rfloor^2\]</div>
+<div class="arithmatex">\[h\left(a,b,c,n\right)=\sum_{i=0}^{n}i\left\lfloor \frac{ai+b}{c} \right\rfloor\]</div>
+<h2 id="f"><span class="arithmatex">\(f\)</span> 函数的化简</h2>
+<p>定义函数 </p>
+<div class="arithmatex">\[f\left(a,b,c,n\right)=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor\]</div>
+<ul>
+<li>
+<h3 id="a0">当 <span class="arithmatex">\(a=0\)</span> 时：</h3>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+f\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor \\ 
+&amp;=\sum_{i=0}^{n}\left\lfloor \frac{b}{c}\right\rfloor \\
+&amp;=\left(n+1\right)\left\lfloor \frac{b}{c}\right\rfloor \\
+\end{aligned}
+\]</div>
+<ul>
+<li>
+<h3 id="age-c-bge-c">当 <span class="arithmatex">\(a\ge c\)</span> 或 <span class="arithmatex">\(b\ge c\)</span> 时：</h3>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+f\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor \\ 
+&amp;=\sum_{i=0}^{n}\left\lfloor \frac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor+\left\lfloor\frac ac\right\rfloor i+\left\lfloor\frac bc\right\rfloor \\ 
+&amp;=\frac12n\left(n+1\right)\left\lfloor \frac ac \right\rfloor + \left(n+1\right)\left\lfloor\frac bc\right\rfloor+\sum_{i=0}^{n}\left\lfloor \frac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor\\ 
+&amp;=\frac12n\left(n+1\right)\left\lfloor \frac ac \right\rfloor + \left(n+1\right)\left\lfloor\frac bc\right\rfloor+f\left(a\bmod c,b\bmod c,c,n\right)\\ 
+\end{aligned}
+\]</div>
+<ul>
+<li>
+<h3 id="a-c-b-c">当 <span class="arithmatex">\(a &lt;c\)</span> 且 <span class="arithmatex">\(b &lt;c\)</span> 时：</h3>
+</li>
+</ul>
+<p>设 <span class="arithmatex">\(m=\left\lfloor\dfrac{an+b}{c}\right\rfloor\)</span>。</p>
+<div class="arithmatex">\[
+\begin{aligned}
+f\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \dfrac{ai+b}{c}\right\rfloor \\ 
+&amp;= \sum_{i=0}^{n}\sum_{j=1}^{m}\left[j\le \frac{ai+b}{c}\right] \\ 
+&amp;= \sum_{i=0}^{n}\sum_{j=1}^{m}\left[jc\le ai+b\right] \\ 
+&amp;= \sum_{i=0}^{n}\sum_{j=1}^{m}\left[jc\lt ai+b+1\right] \\ 
+&amp;= \sum_{i=0}^{n}\sum_{j=0}^{m-1}\left[jc+c\lt ai+b+1\right] \\ 
+&amp;= \sum_{j=0}^{m-1}\sum_{i=0}^{n}\left[i &gt;\frac{cj+c-b-1}{a}\right] \\ 
+&amp;= \sum_{j=0}^{m-1}n-\frac{cj+c-b-1}{a} \\ 
+&amp;= nm-f\left(c,c-b-1,a,m-1\right)
+\end{aligned}
+\]</div>
+<p>综上，有</p>
+<div class="arithmatex">\[
+f\left(a,b,c,n\right)=
+\begin{aligned}
+\begin{cases}
+\left(n+1\right)\left\lfloor\dfrac bc\right\rfloor &amp;\left(a=0\right) \\
+\frac12n\left(n+1\right)\left\lfloor \dfrac ac \right\rfloor + \left(n+1\right)\left\lfloor\dfrac bc\right\rfloor+f\left(a\bmod c,b\bmod c,c,n\right)&amp;\left(a\ge c \ |\  b\ge c\right) \\
+nm-f\left(c,c-b-1,a,m-1\right)&amp;\left(a &lt;c\ \&amp;\ b &lt;c\ \&amp;\ a\ne 0\right) \\
+\end{cases}
+\end{aligned}
+\]</div>
+<h2 id="g"><span class="arithmatex">\(g\)</span> 函数的化简</h2>
+<p>定义函数 </p>
+<div class="arithmatex">\[g\left(a,b,c,n\right)=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor^2\]</div>
+<ul>
+<li>
+<h3 id="a0_1">当 <span class="arithmatex">\(a=0\)</span> 时：</h3>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+g\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor^2 \\ 
+&amp;=\sum_{i=0}^{n}\left\lfloor \frac{b}{c}\right\rfloor^2 \\ 
+&amp;=\left(n+1\right)\left\lfloor \frac{b}{c}\right\rfloor^2
+\end{aligned}
+\]</div>
+<ul>
+<li>
+<h3 id="age-c-bge-c_1">当 <span class="arithmatex">\(a\ge c\)</span> 或 <span class="arithmatex">\(b\ge c\)</span> 时：</h3>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+g\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor^2 \\ 
+&amp;= \sum_{i=0}^{n}\left\lfloor\dfrac{\left(a-c\times \left\lfloor\dfrac{a}{c}\right\rfloor\right)i+c\times \left\lfloor\dfrac{a}{c}\right\rfloor i+\left(b-c\times \left\lfloor\dfrac{b}{c}\right\rfloor\right)+c\times \left\lfloor\dfrac{b}{c}\right\rfloor}{c}\right\rfloor^2 \\ 
+&amp;= \sum_{i=0}^{n}\left\lfloor\dfrac{\left(a-c\times \left\lfloor\dfrac{a}{c}\right\rfloor\right)i+\left(b-c\times \left\lfloor\dfrac{b}{c}\right\rfloor\right)}{c}+\left\lfloor\dfrac{a}{c}\right\rfloor i+\left\lfloor\dfrac{b}{c}\right\rfloor\right\rfloor^2 \\ 
+&amp;= \sum_{i=0}^{n}\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}+\left\lfloor\dfrac{a}{c}\right\rfloor i+\left\lfloor\dfrac{b}{c}\right\rfloor\right\rfloor^2 \\ 
+&amp;= \sum_{i=0}^{n}\left(\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor+\left\lfloor\dfrac{a}{c}\right\rfloor i+\left\lfloor\dfrac{b}{c}\right\rfloor\right)^2 \\ 
+&amp;= \sum_{i=0}^{n}\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor^2+\left\lfloor\dfrac{a}{c}\right\rfloor^2 i^2+\left\lfloor\dfrac{b}{c}\right\rfloor^2+2\left\lfloor\dfrac{a}{c}\right\rfloor\left\lfloor\dfrac{b}{c}\right\rfloor i \\
+&amp;\quad +2\left\lfloor\dfrac{a}{c}\right\rfloor\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor i+2\left\lfloor\dfrac{b}{c}\right\rfloor\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor\\ 
+&amp;= \dfrac 16\left\lfloor\dfrac{a}{c}\right\rfloor^2 n\left(n+1\right)\left(2n+1\right)+\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor^2+\left\lfloor\dfrac{a}{c}\right\rfloor\left\lfloor\dfrac{b}{c}\right\rfloor n\left(n+1\right) \\
+&amp;\quad +2\left\lfloor\dfrac{a}{c}\right\rfloor\sum_{i=0}^n\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor i+2\left\lfloor\dfrac{b}{c}\right\rfloor\sum_{i=0}^n\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor+\sum_{i=0}^{n}\left\lfloor\dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor^2\\ 
+&amp;= \dfrac 16\left\lfloor\dfrac{a}{c}\right\rfloor^2 n\left(n+1\right)\left(2n+1\right)+\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor^2+\left\lfloor\dfrac{a}{c}\right\rfloor\left\lfloor\dfrac{b}{c}\right\rfloor n\left(n+1\right)\\
+&amp;\quad +2\left\lfloor\dfrac{a}{c}\right\rfloor h\left(a\bmod c, b\bmod c, c, n\right)+2\left\lfloor\dfrac{b}{c}\right\rfloor f\left(a\bmod c, b\bmod c, c, n\right)+g\left(a\bmod c, b\bmod c, c, n\right)\\ 
+\end{aligned} 
+\]</div>
+<ul>
+<li>
+<h3 id="a-c-b-c_1">当 <span class="arithmatex">\(a &lt;c\)</span> 且 <span class="arithmatex">\(b &lt;c\)</span> 时：</h3>
+</li>
+</ul>
+<p>设 <span class="arithmatex">\(m=\left\lfloor\dfrac{an+b}{c}\right\rfloor\)</span>。</p>
+<div class="arithmatex">\[
+\begin{aligned}
+g\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor^2 \\ 
+&amp;= \sum_{i=0}^n\left(2\times \dfrac 12 \left\lfloor \frac{ai+b}{c}\right\rfloor\left(\left\lfloor \frac{ai+b}{c}\right\rfloor+1\right)-\left\lfloor \frac{ai+b}{c}\right\rfloor\right) \\
+&amp;= \sum_{i=0}^n\left(2\sum_{j=1}^{\left\lfloor \frac{ai+b}{c}\right\rfloor}j-\left\lfloor \frac{ai+b}{c}\right\rfloor\right) \\
+&amp;= \sum_{i=0}^n\left(2\sum_{j=1}^{m}j\left[j\le \frac{ai+b}{c}\right]-\left\lfloor \frac{ai+b}{c}\right\rfloor\right) \\
+&amp;= \sum_{i=0}^n\left(2\sum_{j=1}^{m}j\left[jc\le ai+b\right]-\left\lfloor \frac{ai+b}{c}\right\rfloor\right) \\
+&amp;= 2\sum_{i=0}^n\sum_{j=1}^{m}j\left[jc\le ai+b\right]-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{i=0}^n\sum_{j=0}^{m-1}\left(j+1\right)\left[jc+c\lt ai+b+1\right]-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{i=0}^n\sum_{j=0}^{m-1}\left(j+1\right)\left[i &gt;\dfrac{jc+c-b-1}{a}\right]-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{j=0}^{m-1}\left(j+1\right)\sum_{i=0}^n\left[i &gt;\dfrac{jc+c-b-1}{a}\right]-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{j=0}^{m-1}\left(j+1\right)\left(n-\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\right)-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{j=0}^{m-1}j\left(n-\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\right)+2\sum_{j=0}^{m-1}\left(n-\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\right)-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{j=0}^{m-1}nj-2\sum_{j=0}^{m-1}j\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor+2\sum_{j=0}^{m-1}n-2\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\left(\sum_{j=0}^{m-1}nj+2\sum_{j=0}^{m-1}n\right)-2\sum_{j=0}^{m-1}j\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-2\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2\sum_{j=0}^{m-1}n\left(j+1\right)-2\sum_{j=0}^{m-1}j\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-2\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= 2n\sum_{j=1}^{m}j-2\sum_{j=0}^{m-1}j\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-2\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor-\sum_{i=0}^n\left\lfloor \frac{ai+b}{c}\right\rfloor \\
+&amp;= nm\left(m+1\right)-2h\left(c,c-b-1,a,m-1\right)-2f\left(c,c-b-1,a,m-1\right)-f\left(a,b,c,n\right) \\
+\end{aligned}
+\]</div>
+<p>综上，有</p>
+<p>$$
+g\left(a,b,c,n\right)=
+\begin{aligned}
+\begin{cases}</p>
+<p>\left(n+1\right)\left\lfloor \dfrac{b}{c}\right\rfloor^2 &amp;\left(a=0\right) \</p>
+<p>\dfrac 16\left\lfloor\dfrac{a}{c}\right\rfloor^2 n\left(n+1\right)\left(2n+1\right)+\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor^2+\left\lfloor\dfrac{a}{c}\right\rfloor\left\lfloor\dfrac{b}{c}\right\rfloor n\left(n+1\right) \
+\quad +2\left\lfloor\dfrac{a}{c}\right\rfloor h\left(a\bmod c, b\bmod c, c, n\right)+2\left\lfloor\dfrac{b}{c}\right\rfloor f\left(a\bmod c, b\bmod c, c, n\right)+g\left(a\bmod c, b\bmod c, c, n\right) &amp;\left(a\ge c\ | \ b\ge c\right) \</p>
+<p>nm\left(m+1\right)-2h\left(c,c-b-1,a,m-1\right)-2f\left(c,c-b-1,a,m-1\right)-f\left(a,b,c,n\right) &amp;\left(a &lt;c\ \&amp;\ b &lt;c\right)</p>
+<p>\end{cases}
+\end{aligned}
+$$</p>
+<h2 id="h"><span class="arithmatex">\(h\)</span> 函数的化简</h2>
+<p>定义函数 </p>
+<div class="arithmatex">\[h\left(a,b,c,n\right)=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor i\]</div>
+<ul>
+<li>
+<h3 id="a0_2">当 <span class="arithmatex">\(a=0\)</span> 时：</h3>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+h\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor i \\ 
+&amp;=\sum_{i=0}^{n}\left\lfloor \frac{b}{c}\right\rfloor i\\ 
+&amp;=\dfrac 12n\left(n+1\right)\left\lfloor \frac{b}{c}\right\rfloor
+\end{aligned}
+\]</div>
+<ul>
+<li>
+<h3 id="age-c-bge-c_2">当 <span class="arithmatex">\(a\ge c\)</span> 或者 <span class="arithmatex">\(b\ge c\)</span> 时：</h3>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+h\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor i \\ 
+&amp;= \sum_{i=0}^n\left\lfloor \dfrac{\left(a-c\times \left\lfloor\dfrac{a}{c}\right\rfloor\right)i+c\times \left\lfloor\dfrac{a}{c}\right\rfloor i+\left(b-c\times \left\lfloor\dfrac{b}{c}\right\rfloor\right)+c\times \left\lfloor\dfrac{b}{c}\right\rfloor}{c} \right\rfloor i \\
+&amp;= \sum_{i=0}^n\left\lfloor \dfrac{\left(a-c\times \left\lfloor\dfrac{a}{c}\right\rfloor\right)i+\left(b-c\times \left\lfloor\dfrac{b}{c}\right\rfloor\right)}{c}+\left\lfloor\dfrac{a}{c}\right\rfloor i +\left\lfloor\dfrac{b}{c}\right\rfloor\right\rfloor i \\
+&amp;= \sum_{i=0}^n\left\lfloor \dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor i+\left\lfloor\dfrac{a}{c}\right\rfloor i^2 +\left\lfloor\dfrac{b}{c}\right\rfloor i \\
+&amp;= \sum_{i=0}^n\left\lfloor \dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor i+\sum_{i=0}^n\left\lfloor\dfrac{a}{c}\right\rfloor i^2 +\sum_{i=0}^n\left\lfloor\dfrac{b}{c}\right\rfloor i \\
+&amp;= \dfrac16n\left(n+1\right)\left(2n+1\right)\left\lfloor\dfrac{a}{c}\right\rfloor +\dfrac12 n\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor+\sum_{i=0}^n\left\lfloor \dfrac{\left(a\bmod c\right)i+\left(b\bmod c\right)}{c}\right\rfloor i \\
+&amp;= \dfrac16n\left(n+1\right)\left(2n+1\right)\left\lfloor\dfrac{a}{c}\right\rfloor +\dfrac12 n\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor+h\left(a\bmod c, b\bmod c, c, n\right) \\
+\end{aligned}
+\]</div>
+<ul>
+<li>
+<h3 id="a-c-b-c_2">当 <span class="arithmatex">\(a &lt;c\)</span> 且 <span class="arithmatex">\(b &lt;c\)</span> 时：</h3>
+</li>
+</ul>
+<p>设 <span class="arithmatex">\(m=\left\lfloor\dfrac{an+b}{c}\right\rfloor\)</span>。</p>
+<div class="arithmatex">\[
+\begin{aligned}
+h\left(a,b,c,n\right)&amp;=\sum_{i=0}^{n}\left\lfloor \frac{ai+b}{c}\right\rfloor i \\ 
+&amp;=\sum_{i=0}^ni\sum_{j=1}^m\left[j\le \dfrac{ai+b}{c}\right] \\
+&amp;=\sum_{i=0}^ni\sum_{j=1}^m\left[jc\le ai+b\right] \\
+&amp;=\sum_{i=0}^ni\sum_{j=1}^m\left[jc\lt ai+b+1\right] \\
+&amp;=\sum_{i=0}^ni\sum_{j=0}^{m-1}\left[jc+c\lt ai+b+1\right] \\
+&amp;=\sum_{i=0}^ni\sum_{j=0}^{m-1}\left[i &gt;\dfrac{jc+c-b-1}{a}\right] \\
+&amp;=\sum_{j=0}^{m-1}\sum_{i=0}^ni\left[i &gt;\dfrac{jc+c-b-1}{a}\right] \\
+&amp;=\sum_{j=0}^{m-1}\left(\sum_{i=0}^ni-\sum_{i=0}^ni\left[i\le \dfrac{jc+c-b-1}{a}\right] \right)\\
+&amp;=\sum_{j=0}^{m-1}\left(\dfrac12n\left(n+1\right)-\sum_{i=0}^ni\left[i\le \dfrac{jc+c-b-1}{a}\right] \right)\\
+&amp;=\sum_{j=0}^{m-1}\left(\dfrac12n\left(n+1\right)-\sum_{i=0}^{\left\lfloor\frac{jc+c-b-1}{a}\right\rfloor}i \right)\\
+&amp;=\sum_{j=0}^{m-1}\left(\dfrac12n\left(n+1\right)-\dfrac12\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\left(\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor+1\right)\right)\\
+&amp;=\dfrac12\sum_{j=0}^{m-1}n\left(n+1\right)-\dfrac12\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\left(\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor+1\right)\\
+&amp;=\dfrac12mn\left(n+1\right)-\dfrac12\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor^2-\dfrac12\sum_{j=0}^{m-1}\left\lfloor\dfrac{jc+c-b-1}{a}\right\rfloor\\
+&amp;=\dfrac12mn\left(n+1\right)-\dfrac12g\left(c,c-b-1,a,m-1\right)-\dfrac12f\left(c,c-b-1,a,m-1\right)\\
+\end{aligned}
+\]</div>
+<p>综上，有</p>
+<p>$$
+h\left(a,b,c,n\right)=
+\begin{aligned}
+\begin{cases}</p>
+<p>\dfrac12n\left(n+1\right)\left\lfloor \dfrac{b}{c}\right\rfloor &amp;\left(a=0\right) \</p>
+<p>\dfrac16n\left(n+1\right)\left(2n+1\right)\left\lfloor\dfrac{a}{c}\right\rfloor +\dfrac12 n\left(n+1\right)\left\lfloor\dfrac{b}{c}\right\rfloor+h\left(a\bmod c, b\bmod c, c, n\right) &amp;\left(a\ge c\ | \ b\ge c\right) \</p>
+<p>\dfrac12mn\left(n+1\right)-\dfrac12g\left(c,c-b-1,a,m-1\right)-\dfrac12f\left(c,c-b-1,a,m-1\right) &amp;\left(a &lt;c\ \&amp;\ b &lt;c\right)</p>
+<p>\end{cases}
+\end{aligned}
+$$</p>
+<p>以上对类欧的三个基本函数进行了详细的推导。</p>
+<h2 id="p5172-sum">例题：<a href="https://www.luogu.com.cn/problem/P5172">P5172 Sum</a></h2>
+<p>在<a href="https://ternarytree.blog.luogu.org/p5172-sum">这篇题解</a>中进行了介绍。</p>
+<p>如果你阅读到了这里，你的推式子能力已经过关了。接下来请见第二章：同余。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.a7c05c9e.min.js"></script>
+      
+        <script src="../../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
