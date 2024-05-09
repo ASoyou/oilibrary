@@ -8,7 +8,20 @@ theme:
   features:
     - navigation.tabs
     - navigation.tabs.sticky
-extra:
+  icon:
+    admonition:
+      note: fontawesome/solid/note-sticky
+      abstract: fontawesome/solid/book
+      info: fontawesome/solid/circle-info
+      tip: fontawesome/solid/bullhorn
+      success: fontawesome/solid/check
+      question: fontawesome/solid/circle-question
+      warning: fontawesome/solid/triangle-exclamation
+      failure: fontawesome/solid/bomb
+      danger: fontawesome/solid/skull
+      bug: fontawesome/solid/robot
+      example: fontawesome/solid/flask
+      quote: fontawesome/solid/quote-left
   consent:
     title: Cookie 请求
     description: >- 
@@ -19,11 +32,14 @@ nav:
       - "简介" : "index.md"
       - "学术规范" : "rules.md"
   - "数学" :
-    - "基础" :
-      - "学会推式子" : "math/number-theory/basic.md"
+    - "数论" :
+      - "基础" : "math/number-theory/basic1.md"
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
 extra_javascript:
   - javascripts/katex.js
   - https://unpkg.com/katex@0/dist/katex.min.js

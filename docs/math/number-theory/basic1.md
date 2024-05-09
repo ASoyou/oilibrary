@@ -1,3 +1,6 @@
+> [!Tip]
+> 本文来源于 [数学数论第一章之学会推式子](https://www.luogu.com/article/oqctj6kq)，作者 [洛谷@TernaryTree](https://www.luogu.com/user/362750)
+
 2022.7.20 动工。
 
 2022.7.22 基本完工。
