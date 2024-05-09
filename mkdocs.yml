@@ -17,6 +17,16 @@ nav:
   - "欢迎" :
     - "关于本站" :
       - "简介" : "index.md"
+      - "学术规范" : "rules.md"
   - "数学" :
     - "基础" :
       - "学会推式子" : "math/number-theory/basic.md"
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+extra_javascript:
+  - javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+extra_css:
+  - https://unpkg.com/katex@0/dist/katex.min.css
